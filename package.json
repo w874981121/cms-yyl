@@ -1,0 +1,36 @@
+{
+  "name": "cms-yyl",
+  "version": "1.0.0",
+  "description": "node   cms系统  功能模块分割，自由组合",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run watch-ts & npm run watch-node",
+    "watch-node": "nodemon ./dist/app.js",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w874981121/cms-yyl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w874981121/cms-yyl/issues"
+  },
+  "homepage": "https://github.com/w874981121/cms-yyl#readme",
+  "devDependencies": {
+    "@types/koa": "^2.0.45",
+    "@types/koa-router": "^7.0.28",
+    "@types/log4js": "^2.3.5",
+    "@types/node": "^10.1.4",
+    "nodemon": "^1.17.5",
+    "ts-node": "^6.0.5",
+    "typescript": "^2.8.3"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "koa-route": "^3.2.0",
+    "log4js": "^2.7.0"
+  }
+}
