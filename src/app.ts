@@ -6,19 +6,27 @@
  */
 'use strict';
 
-
 import * as Koa from 'koa';
 // import * as Router from 'koa-router'
 
+import MongoClient from "./mongodb/connect-db"
+
 import log4js from './config/log.config'
+
 const app = new Koa();
+
 const logger = log4js.getLogger(null);
+
 //接入req日志输出
 log4js.useLogger(app, logger);
 
 app.use(async ctx => {
-    ctx.body = 'Hello World';
+    return ctx.body = "hello worder";
 });
+
+MongoClient
+
+console.log("00000")
 
 logger.error("666666");
 logger.info("666666");

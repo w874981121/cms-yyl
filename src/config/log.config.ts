@@ -6,9 +6,12 @@
  * log.config
  *
  * 使用案例
+ * 引入
  * const log4js = require('./config/log.config.js');
- * const errlogger = log4js.getLogger('err');
- * const othlogger = log4js.getLogger('oth');
+ * 声明
+ * const errlogger = log4js.getLogger('err');  错误日志
+ * const othlogger = log4js.getLogger('oth');  全部日志
+ * 使用
  * errlogger.error('test error 1');
  * othlogger.info('test info 2');
  *
@@ -30,22 +33,22 @@ import * as Log4js from 'log4js';
 const config: object = {
     replaceConsole: true,
     appenders: {
-        stdout: {//控制台输出
+        stdout: {// 输出位置：控制台输出
             type: 'stdout'
         },
-        req: {//请求日志
+        req: {// 输出位置：请求日志
             type: 'dateFile',
             filename: 'logs/reqlog/',
             pattern: 'req-yyyy-MM-dd-hh.log',
             alwaysIncludePattern: true
         },
-        err: {//错误日志
+        err: {// 输出位置：错误日志
             type: 'dateFile',
             filename: 'logs/errlog/',
             pattern: 'err-yyyy-MM-dd-hh.log',
             alwaysIncludePattern: true
         },
-        oth: {//其他日志
+        oth: {// 输出位置：其他日志
             type: 'dateFile',
             filename: 'logs/othlog/',
             pattern: 'oth-yyyy-MM-dd-hh.log',
@@ -53,8 +56,8 @@ const config: object = {
         }
     },
     categories: {
-        default: {appenders: ['stdout', 'req'], level: 'debug'},  //appenders 绑定输出
-        err: {appenders: ['stdout', 'err'], level: 'error'},
+        default: {appenders: ['stdout', 'req'], level: 'debug'},  //配置输出位置
+        err: {appenders: ['stdout', 'err', 'oth'], level: 'error'},
         oth: {appenders: ['stdout', 'oth'], level: 'info'}
     }
 };
@@ -69,8 +72,9 @@ Log4js.configure(<any>config);
  *
  **/
 
+
 const getLogger = function (name: any) {
-    return Log4js.getLogger(name || 'default')
+    return Log4js.getLogger(name || 'oth')  //默认输出 othlog 文件夹
 };
 
 /**
