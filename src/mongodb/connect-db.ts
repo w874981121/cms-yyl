@@ -5,14 +5,18 @@
 *
 * */
 
-import log4js from '../config/log.config'
+
 import * as Mongoose from 'mongoose';
 import Config from '../config/mongodb.config'
+import log4js from '../config/log.config'
+/*
+* othlogger 输出全部日志
+* errlogger 输出错误日志
+*
+* */
 
 const othlogger = log4js.getLogger('oth');
 const errlogger = log4js.getLogger('error');
-
-//Mongoose.connect(Config.Db_URL, {useNewUrlParser: true, server: {auto_reconnect: true}});
 
 Mongoose.connect(Config.Db_URL, {useNewUrlParser: true}, (err) => {
     if(err){
@@ -38,7 +42,7 @@ db.on('close', function () {
     console.log('数据库断开，重新连接数据库');
 });
 
-Mongoose
+// Mongoose
 
 export default Mongoose
 

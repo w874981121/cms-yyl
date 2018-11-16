@@ -1,4 +1,3 @@
-///<reference path="config/log.config.ts"/>
 /**
  * Created wangyanqi
  * Date 2018/5/22
@@ -25,16 +24,15 @@ app.use(async ctx => {
     return ctx.body = "hello worder";
 });
 
-MongoClient
 
-console.log("00000")
-
-logger.error("666666");
-logger.info("666666");
-logger.debug("666666");
-logger.fatal("666666");
+MongoClient;
 
 
+// logger.info("111111111");
+// logger.error("666666");
+// logger.info("666666");
+// logger.debug("666666");
+// logger.fatal("666666");
 
 
 app.listen(3000);

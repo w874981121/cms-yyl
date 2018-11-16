@@ -28,7 +28,7 @@
 
 'use strict';
 
-import * as Log4js from 'log4js';
+import * as Log4js from "log4js";
 
 const config: object = {
     replaceConsole: true,
@@ -77,9 +77,10 @@ const getLogger = function (name: any) {
     return Log4js.getLogger(name || 'oth')  //默认输出 othlog 文件夹
 };
 
+
 /**
  *
- * 接入框架:
+ * 接入框架方法:
  * logger: 参数（Log4js.getLogger(自定义配置项)）
  *
  **/
@@ -89,6 +90,8 @@ const useLogger = function (app: any, logger: any) {//koa   接入自定义输�
         format: '[:remote-addr :method :url :status :response-timems][:referrer HTTP/:http-version :user-agent]'//自定义输出格式
     }))
 };
+
+
 
 export default {
     getLogger,
