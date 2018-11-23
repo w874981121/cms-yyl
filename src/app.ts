@@ -7,23 +7,39 @@
 
 import * as Koa from 'koa';
 // import * as Router from 'koa-router'
-import * as http from 'http';
-
 import MongoClient from "./mongodb/connect-db"
-
 import log4js from './config/log.config'
+import router from './config/router.config'
+import * as Log4js from "log4js";
 
 const app = new Koa();
 
 const logger = log4js.getLogger(null);
 
 //接入req日志输出
-log4js.useLogger(app, logger);
+// log4js.useLogger(app, logger);
 
-app.use(async ctx => {
-    return ctx.body = "hello worder";
-});
+app.use(async(ctx, next) => {
+    const start:any = new Date()
+    try {
+        await next()
+        let ms:any = <any>new Date() - start
+        logger.info("66666-------666666", ms)
 
+        Log4js.connectLogger(logger, {
+            format: '[:remote-addr :method :url :status :response-timems][:referrer HTTP/:http-version :user-agent]'//自定义输出格式
+        })
+
+    }catch{
+        logger.error("66666-------666666")
+    }
+
+
+
+})
+// app.use(Log4js.connectLogger(logger, {level:'DEBUG'}))
+
+app.use(router.routes()).use(router.allowedMethods());
 
 MongoClient;
 

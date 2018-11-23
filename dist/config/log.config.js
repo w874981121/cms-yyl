@@ -73,11 +73,11 @@ const getLogger = function (name) {
 /**
  *
  * 接入框架方法:
- * logger: 参数（Log4js.getLogger(自定义配置项)）
+ * logger: 参数（Log4js.useLogger(自定义配置项)）
  *
  **/
 const useLogger = function (app, logger) {
-    app.use(Log4js.connectLogger(logger || Log4js.getLogger('default'), {
+    app.use(Log4js.connectLogger(logger, {
         format: '[:remote-addr :method :url :status :response-timems][:referrer HTTP/:http-version :user-agent]' //自定义输出格式
     }));
 };
