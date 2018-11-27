@@ -29,7 +29,7 @@ db.on('error', function (error) {
 });
 // 连接成功
 db.once('open', function () {
-    othlogger.info("数据库连接成功：6666666");
+    othlogger.info("数据库连接成功：" + mongodb_config_1.default.Db_URL);
 });
 // 断开重启
 db.on('close', function () {

@@ -23,6 +23,7 @@
   "homepage": "https://github.com/w874981121/cms-yyl#readme",
   "devDependencies": {
     "@types/koa": "^2.0.46",
+    "@types/koa-bodyparser": "^4.2.1",
     "@types/koa-router": "^7.0.31",
     "@types/log4js": "^2.3.5",
     "@types/mongoose": "^5.2.5",
@@ -35,6 +36,8 @@
   "dependencies": {
     "http": "0.0.0",
     "koa": "^2.6.2",
+    "koa-body": "^4.0.4",
+    "koa-bodyparser": "^4.2.1",
     "koa-route": "^3.2.0",
     "koa-router": "^7.4.0",
     "log4js": "^3.0.5",

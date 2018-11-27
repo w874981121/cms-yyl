@@ -40,6 +40,12 @@ const config = {
             pattern: 'req-yyyy-MM-dd-hh.log',
             alwaysIncludePattern: true
         },
+        db: {
+            type: 'dateFile',
+            filename: 'logs/dblog/',
+            pattern: 'req-yyyy-MM-dd-hh.log',
+            alwaysIncludePattern: true
+        },
         err: {
             type: 'dateFile',
             filename: 'logs/errlog/',
@@ -54,9 +60,11 @@ const config = {
         }
     },
     categories: {
-        default: { appenders: ['stdout', 'req'], level: 'debug' },
+        default: { appenders: ['stdout', 'oth'], level: 'debug' },
         err: { appenders: ['stdout', 'err', 'oth'], level: 'error' },
-        oth: { appenders: ['stdout', 'oth'], level: 'info' }
+        oth: { appenders: ['stdout', 'oth'], level: 'info' },
+        req: { appenders: ['stdout', 'req', 'oth'], level: 'info' },
+        db: { appenders: ['stdout', 'db', 'oth'], level: 'info' },
     }
 };
 Log4js.configure(config);

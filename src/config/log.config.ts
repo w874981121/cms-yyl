@@ -42,6 +42,12 @@ const config: object = {
             pattern: 'req-yyyy-MM-dd-hh.log',
             alwaysIncludePattern: true
         },
+        db: {
+            type: 'dateFile',
+            filename: 'logs/dblog/',
+            pattern: 'req-yyyy-MM-dd-hh.log',
+            alwaysIncludePattern: true
+        },
         err: {// 输出位置：错误日志
             type: 'dateFile',
             filename: 'logs/errlog/',
@@ -56,9 +62,11 @@ const config: object = {
         }
     },
     categories: {
-        default: {appenders: ['stdout', 'req'], level: 'debug'},  //配置输出位置
-        err: {appenders: ['stdout', 'err', 'oth'], level: 'error'},
-        oth: {appenders: ['stdout', 'oth'], level: 'info'}
+        default: {appenders: ['stdout','oth'], level: 'debug'},      //默认
+        err: {appenders: ['stdout', 'err', 'oth'], level: 'error'}, //接口错误日志
+        oth: {appenders: ['stdout', 'oth'], level: 'info'},        //全部
+        req:{appenders: ['stdout', 'req','oth'], level: 'info'},  //请求
+        db:{appenders: ['stdout', 'db','oth'], level: 'info'},  //数据库
     }
 };
 

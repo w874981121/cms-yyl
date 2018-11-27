@@ -9,5 +9,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Router = require("koa-router");
 const index_1 = require("./controllers/index");
 const upload = new Router();
-upload.get('/upload', index_1.ApiRes);
+upload.post('/upload', index_1.ApiRes);
 exports.default = upload;

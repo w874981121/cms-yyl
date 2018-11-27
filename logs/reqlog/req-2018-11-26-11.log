@@ -1,0 +1,79 @@
+[2018-11-26T11:22:20.710] [INFO] req - 66666-------666666 { request:
+   { method: 'GET',
+     url: '/api/upload?name=6666777788889999',
+     header:
+      { host: '127.0.0.1:3000',
+        connection: 'keep-alive',
+        'cache-control': 'max-age=0',
+        'upgrade-insecure-requests': '1',
+        'user-agent':
+         'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+        accept:
+         'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'zh-CN,zh;q=0.9' } },
+  response: { status: 404, message: 'Not Found', header: {} },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl: '/api/upload?name=6666777788889999',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>' }
+[2018-11-26T11:25:31.200] [WARN] req - 66666-------666666 { request:
+   { method: 'GET',
+     url: '/api/upload?name=6666777788889999',
+     header:
+      { host: '127.0.0.1:3000',
+        connection: 'keep-alive',
+        'cache-control': 'max-age=0',
+        'upgrade-insecure-requests': '1',
+        'user-agent':
+         'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+        accept:
+         'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'zh-CN,zh;q=0.9' } },
+  response: { status: 404, message: 'Not Found', header: {} },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl: '/api/upload?name=6666777788889999',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>' }
+[2018-11-26T11:25:48.270] [ERROR] req - 66666-------666666 { request:
+   { method: 'GET',
+     url: '/api/upload?name=6666777788889999',
+     header:
+      { host: '127.0.0.1:3000',
+        connection: 'keep-alive',
+        'cache-control': 'max-age=0',
+        'upgrade-insecure-requests': '1',
+        'user-agent':
+         'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+        accept:
+         'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'zh-CN,zh;q=0.9' } },
+  response: { status: 404, message: 'Not Found', header: {} },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl: '/api/upload?name=6666777788889999',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>' }
+[2018-11-26T11:53:49.062] [INFO] default - app.ts-接口处理时间：37
+[2018-11-26T11:53:51.937] [INFO] default - app.ts-接口处理时间：31
+[2018-11-26T11:53:52.244] [INFO] default - app.ts-接口处理时间：19
+[2018-11-26T11:53:52.533] [INFO] default - app.ts-接口处理时间：62
+[2018-11-26T11:53:52.707] [INFO] default - app.ts-接口处理时间：46
+[2018-11-26T11:53:52.877] [INFO] default - app.ts-接口处理时间：29
+[2018-11-26T11:53:53.049] [INFO] default - app.ts-接口处理时间：22
+[2018-11-26T11:56:56.750] [INFO] db - app.ts-接口处理时间：34
+[2018-11-26T11:56:59.672] [INFO] db - app.ts-接口处理时间：22
+[2018-11-26T11:56:59.983] [INFO] db - app.ts-接口处理时间：22
+[2018-11-26T11:57:00.201] [INFO] db - app.ts-接口处理时间：58
+[2018-11-26T11:57:00.327] [INFO] db - app.ts-接口处理时间：19
+[2018-11-26T11:57:26.024] [INFO] db - app.ts-接口处理时间：22
+[2018-11-26T11:57:26.321] [INFO] db - app.ts-接口处理时间：33
+[2018-11-26T11:57:26.583] [INFO] db - app.ts-接口处理时间：65
+[2018-11-26T11:57:26.726] [INFO] db - app.ts-接口处理时间：33
+[2018-11-26T11:57:26.874] [INFO] db - app.ts-接口处理时间：26
+[2018-11-26T11:57:27.047] [INFO] db - app.ts-接口处理时间：23
+[2018-11-26T11:57:27.215] [INFO] db - app.ts-接口处理时间：26

@@ -8,6 +8,6 @@ import * as Router from 'koa-router'
 import {ApiRes}  from './controllers/index'
 const upload = new Router();
 
-upload.get('/upload', <any>ApiRes)
+upload.post('/upload', <any>ApiRes)
 
 export default upload

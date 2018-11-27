@@ -5,51 +5,44 @@
  */
 'use strict';
 
-import * as Koa from 'koa';
-// import * as Router from 'koa-router'
+import Koa = require('koa')
+// @ts-ignore
+import bodyParser = require('koa-bodyparser')
 import MongoClient from "./mongodb/connect-db"
 import log4js from './config/log.config'
 import router from './config/router.config'
-import * as Log4js from "log4js";
+
 
 const app = new Koa();
-
-const logger = log4js.getLogger(null);
-
-//接入req日志输出
-// log4js.useLogger(app, logger);
-
+app.use(bodyParser())
+/**
+ *
+ *接入req日志输出
+ * req ：
+ * 输出位置"/logs/reqlog"
+ *
+ **/
+const loggerReq = log4js.getLogger('db');
+const loggerErr = log4js.getLogger('err');
 app.use(async(ctx, next) => {
     const start:any = new Date()
     try {
+        ctx.set("Access-Control-Allow-Origin", "*");
         await next()
         let ms:any = <any>new Date() - start
-        logger.info("66666-------666666", ms)
-
-        Log4js.connectLogger(logger, {
-            format: '[:remote-addr :method :url :status :response-timems][:referrer HTTP/:http-version :user-agent]'//自定义输出格式
-        })
-
+        loggerReq.info("app.ts-接口处理时间："+ ms)
     }catch{
-        logger.error("66666-------666666")
+        loggerReq.error("66666-------666666")
     }
 
-
-
 })
-// app.use(Log4js.connectLogger(logger, {level:'DEBUG'}))
+
 
 app.use(router.routes()).use(router.allowedMethods());
 
 MongoClient;
 
-
-// logger.info("111111111");
-// logger.error("666666");
-// logger.info("666666");
-// logger.debug("666666");
-// logger.fatal("666666");
-
-
-app.listen(3000);
+app.listen(3000,()=>{
+    console.log('服务启动成功：http://127.0.0.1:3000');
+});
 

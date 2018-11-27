@@ -10,16 +10,15 @@
 const ApiRes = async (ctx: any, next: any) => {
     console.log("----------")
     // console.log(ctx.req.connection)
-    console.log( ctx.req.headers)
+    // console.log( ctx.req.headers)
     console.log("********")
-    console.log( ctx.query)
-    // ctx.body=ctx.req
+    console.log(ctx.request.body);
+    ctx.body={
+        msg:"返回成功",
+        data:ctx.request.body,
+        params:ctx.query
+    }
     console.log("----------")
 }
 
-const ALL = async (ctx: any, next: any) => {
-    console.log(ctx
-    )
-}
-
-export {ApiRes, ALL}
+export {ApiRes}
