@@ -8,6 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Koa = require("koa");
 // @ts-ignore
 const bodyParser = require("koa-bodyparser");
+const koaBody = require("koa-body");
 const connect_db_1 = require("./mongodb/connect-db");
 const log_config_1 = require("./config/log.config");
 const router_config_1 = require("./config/router.config");
@@ -34,6 +35,17 @@ app.use(async (ctx, next) => {
         loggerReq.error("66666-------666666");
     }
 });
+/**
+ *
+ * 文件上传插件设置
+ *
+ * */
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 200 * 1024 * 1024 // 设置上传文件大小最大限制，默认2M
+    }
+}));
 app.use(router_config_1.default.routes()).use(router_config_1.default.allowedMethods());
 connect_db_1.default;
 app.listen(3000, () => {

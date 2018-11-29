@@ -8,6 +8,7 @@
 import Koa = require('koa')
 // @ts-ignore
 import bodyParser = require('koa-bodyparser')
+import koaBody = require('koa-body');
 import MongoClient from "./mongodb/connect-db"
 import log4js from './config/log.config'
 import router from './config/router.config'
@@ -34,8 +35,18 @@ app.use(async(ctx, next) => {
     }catch{
         loggerReq.error("66666-------666666")
     }
-
 })
+/**
+ *
+ * 文件上传插件设置
+ *
+ * */
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+    }
+}));
 
 
 app.use(router.routes()).use(router.allowedMethods());
