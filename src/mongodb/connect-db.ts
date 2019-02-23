@@ -26,23 +26,22 @@ Mongoose.connect(Config.Db_URL, {useNewUrlParser: true}, (err) => {
 
 const db = Mongoose.connection;
 
-// 错误捕获
+// 监听错误
 db.on('error', function (error) {
     errlogger.error("数据库错误：" + error)
     Mongoose.disconnect();  //断开
 });
 
-// 连接成功
+// // 连接成功
 db.once('open', function () {
     othlogger.info("数据库连接成功："+Config.Db_URL)
 });
 
-// 断开重启
+// 监听断开
 db.on('close', function () {
-    console.log('数据库断开，重新连接数据库');
+    console.log('数据库断开');
 });
 
-// Mongoose
 
 export default Mongoose
 

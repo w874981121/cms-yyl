@@ -18,6 +18,7 @@ const userSchema: any = new Mongoose.Schema({
     password: String,
     rid: String,  //对应角色id
     state: Boolean, //当前用户状态，是否可用
+    superadmin: Boolean, //是否为超级管理员
     time: {
         createAt: {
             type: Date,

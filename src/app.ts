@@ -5,17 +5,14 @@
  */
 'use strict';
 
-import Koa = require('koa')
-// @ts-ignore
-import bodyParser = require('koa-bodyparser')
+import Koa = require('koa');
 import koaBody = require('koa-body');
-import MongoClient from "./mongodb/connect-db"
-import log4js from './config/log.config'
-import router from './config/router.config'
+import MongoClient from "./mongodb/connect-db";
+import log4js from './config/log.config';
+import router from './config/router.config';
 
 
 const app = new Koa();
-app.use(bodyParser())
 /**
  *
  *接入req日志输出

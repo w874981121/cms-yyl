@@ -17,7 +17,6 @@ import path = require("path");
 const fike_url: string = path.join(__dirname, '../../../../upfile/img/');
 
 export const ApiRes = async (ctx: any, next: any) => {
-    console.log("----------")
     // 上传单个文件
     const file = ctx.request.files.file; // 获取上传文件
     new UpFile(fike_url, file,(path:string)=>{
@@ -27,7 +26,6 @@ export const ApiRes = async (ctx: any, next: any) => {
     ctx.body = {
         msg: "返回成功",
     }
-    console.log("----------")
 }
 
 
@@ -89,9 +87,6 @@ class UpFile {
         readStream.on('error',function(err){
             console.log('读取文件失败');
         });
-
-        // console.log(upStream)
-        //
 
     }
 

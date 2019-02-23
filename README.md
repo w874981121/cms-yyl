@@ -12,6 +12,15 @@ node   cms系统  功能模块分割，自由组合
 log模块：
    文件上传
 
+接口源 "src/config/router.config.ts"
+
+模块：
+  文件上传
+  用户权限管理
+
+
+
+
 
 
 

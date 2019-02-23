@@ -6,14 +6,11 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const Koa = require("koa");
-// @ts-ignore
-const bodyParser = require("koa-bodyparser");
 const koaBody = require("koa-body");
 const connect_db_1 = require("./mongodb/connect-db");
 const log_config_1 = require("./config/log.config");
 const router_config_1 = require("./config/router.config");
 const app = new Koa();
-app.use(bodyParser());
 /**
  *
  *接入req日志输出

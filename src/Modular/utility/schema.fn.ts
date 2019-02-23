@@ -6,9 +6,8 @@
  *
  **/
 
-
 'use strict';
-//时间更新函数
+//数据库写入时间戳更新（公用方法）
 export const upData = function (this: any, next: any) {
     if (!this.isNew) {
         this.time.updateAt = Date.now()
@@ -17,6 +16,3 @@ export const upData = function (this: any, next: any) {
     }
     next();
 }
-
-
-

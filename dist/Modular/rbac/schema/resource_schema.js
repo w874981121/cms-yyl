@@ -12,10 +12,8 @@ const Mongoose = require("mongoose");
 const schema_fn_1 = require("../../utility/schema.fn");
 const resoureSchema = new Mongoose.Schema({
     name: String,
-    rid: [],
+    id: { type: Number, default: 0 },
     uid: [],
-    pid: String,
-    pods: [],
     state: Boolean,
     time: {
         createAt: {
@@ -28,5 +26,6 @@ const resoureSchema = new Mongoose.Schema({
         },
     }
 });
-resoureSchema.pre('save', schema_fn_1.upData);
-exports.default = Mongoose.model('user', resoureSchema);
+resoureSchema.pre('create', schema_fn_1.upData);
+const MongodbResource = Mongoose.model('user', resoureSchema);
+exports.default = MongodbResource;

@@ -15,6 +15,7 @@ const userSchema = new Mongoose.Schema({
     password: String,
     rid: String,
     state: Boolean,
+    superadmin: Boolean,
     time: {
         createAt: {
             type: Date,

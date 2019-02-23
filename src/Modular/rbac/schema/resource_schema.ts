@@ -12,12 +12,10 @@
 import * as Mongoose from 'mongoose';
 import {upData} from "../../utility/schema.fn";
 
-const resoureSchema:any = new Mongoose.Schema({
+const resoureSchema: any = new Mongoose.Schema({
     name: String,
-    rid: [],  //对应资源（权限）id
-    uid: [],  //对应拥有此角色的用户id
-    pid: String, //资源（权限）上级id
-    pods: [],  //所有上级
+    id: {type: Number, default: 0},
+    uid: [],  //权限拥有此角色的id
     state: Boolean, //当前权限状态，是否可用
     time: {
         createAt: {
@@ -31,6 +29,9 @@ const resoureSchema:any = new Mongoose.Schema({
     }
 });
 
-resoureSchema.pre('save', upData);
-export default  Mongoose.model('user', resoureSchema);
+resoureSchema.pre('create', upData);
+
+const MongodbResource = Mongoose.model('user', resoureSchema);
+
+export default MongodbResource
 
