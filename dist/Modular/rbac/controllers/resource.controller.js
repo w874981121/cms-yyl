@@ -15,7 +15,6 @@ exports.AddResource = async (ctx, next) => {
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
-            data: res,
         };
     });
 };
@@ -30,14 +29,16 @@ exports.QueryResource = async (ctx, next) => {
                 name: tem.name,
                 uid: tem.uid,
                 _id: tem._id,
-                id: tem.id
+                id: tem.id,
+                grade: tem.grade,
+                address: tem.address,
+                state: tem.state
             });
         });
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
             data: filter_res,
-            res: res
         };
     });
 };

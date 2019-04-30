@@ -19,7 +19,6 @@ export const AddResource = async (ctx: any, next: any) => {
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
-            data: res,
         }
     })
 }
@@ -35,14 +34,16 @@ export const QueryResource = async (ctx: any, next: any) => {
                 name: tem.name,
                 uid: tem.uid,
                 _id: tem._id,
-                id: tem.id
+                id: tem.id,
+                grade:tem.grade,
+                address:tem.address,
+                state:tem.state
             })
         })
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
             data: filter_res,
-            res:res
         }
     })
 }

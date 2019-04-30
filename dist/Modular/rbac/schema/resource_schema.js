@@ -13,8 +13,10 @@ const schema_fn_1 = require("../../utility/schema.fn");
 const resoureSchema = new Mongoose.Schema({
     name: String,
     id: { type: Number, default: 0 },
+    grade: { type: Number, default: 0 },
+    address: { type: String, default: null },
     uid: [],
-    state: Boolean,
+    state: { type: Boolean, default: true },
     time: {
         createAt: {
             type: Date,

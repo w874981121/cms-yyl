@@ -15,8 +15,10 @@ import {upData} from "../../utility/schema.fn";
 const resoureSchema: any = new Mongoose.Schema({
     name: String,
     id: {type: Number, default: 0},
+    grade: {type: Number, default: 0},   // 等级
+    address:{type: String, default: null},  // 描述
     uid: [],  //权限拥有此角色的id
-    state: Boolean, //当前权限状态，是否可用
+    state: {type: Boolean, default: true}, //当前权限状态，是否可用
     time: {
         createAt: {
             type: Date,
