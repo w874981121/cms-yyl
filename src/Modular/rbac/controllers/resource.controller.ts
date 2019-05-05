@@ -5,17 +5,22 @@
  * */
 
 'use strict';
-import MongodbResource from "../schema/resource_schema"
-
-import UserOperation from "../services/resource.services"
-import {debug} from "util";
+import PowerOperation from "../services/resource.services"
+// import {debug} from "util";
 
 //添加权限
-export const AddResource = async (ctx: any, next: any) => {
+const AddResource = async (ctx: any, next: any) => {
     let o = ctx.request.body;
-    console.log(o)
-    await UserOperation.moAdd(o).then((res) => {
+    await PowerOperation.moAdd(o).then((res: any) => {
         console.log(res)
+        if(res.code === "10001"){
+            console.log(res)
+            ctx.response.body={
+                code:res.code,
+                mas:"已存在"
+            }
+            return
+        }
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
@@ -24,20 +29,20 @@ export const AddResource = async (ctx: any, next: any) => {
 }
 
 //查询
-export const QueryResource = async (ctx: any, next: any) => {
+const QueryResource = async (ctx: any, next: any) => {
     let o = ctx.request.body
-    await UserOperation.moFind(o).then((res: any) => {
+    await PowerOperation.moFind(o).then((res: any) => {
         console.log(typeof res)
-        let filter_res: any =[];
+        let filter_res: any = [];
         res.forEach((tem: any, i: number) => {
             filter_res.push({
                 name: tem.name,
                 uid: tem.uid,
                 _id: tem._id,
                 id: tem.id,
-                grade:tem.grade,
-                address:tem.address,
-                state:tem.state
+                grade: tem.grade,
+                address: tem.address,
+                state: tem.state
             })
         })
         ctx.response.body = {
@@ -49,10 +54,10 @@ export const QueryResource = async (ctx: any, next: any) => {
 }
 
 //删除
-export const DeleteResource = async (ctx: any, next: any) => {
+const DeleteResource = async (ctx: any, next: any) => {
     console.log(ctx.request.query)
     let o = ctx.request.query
-    await UserOperation.moDelete(o).then((res) => {
+    await PowerOperation.moDelete(o).then((res: any) => {
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
@@ -62,8 +67,16 @@ export const DeleteResource = async (ctx: any, next: any) => {
 }
 
 //修改
-export const ModifyResource = async (ctx: any, next: any) => {
+const ModifyResource = async (ctx: any, next: any) => {
     let o = ctx.request.body
-    await UserOperation.moFind(o).then((res) => {
+    await PowerOperation.moFind(o).then((res: any) => {
+
     })
+}
+
+export {
+    AddResource,
+    QueryResource,
+    DeleteResource,
+    ModifyResource
 }

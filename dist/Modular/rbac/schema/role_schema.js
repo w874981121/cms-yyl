@@ -11,9 +11,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Mongoose = require("mongoose");
 const schema_fn_1 = require("../../utility/schema.fn");
+const config_constants_1 = require("../../config.constants");
 const roleSchema = new Mongoose.Schema({
     name: String,
-    rid: [],
+    rid: [{
+            name: String,
+            id: { type: Number, default: 0 },
+            grade: { type: Number, default: 0 },
+        }],
     uid: [],
     pid: String,
     pids: [],
@@ -30,4 +35,4 @@ const roleSchema = new Mongoose.Schema({
     }
 });
 roleSchema.pre('save', schema_fn_1.upData);
-exports.default = Mongoose.model('user', roleSchema);
+exports.default = Mongoose.model(config_constants_1.ROLE, roleSchema);

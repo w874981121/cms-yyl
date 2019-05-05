@@ -9,7 +9,8 @@
 'use strict';
 
 import * as Mongoose from 'mongoose';
-import { upData } from '../../utility/schema.fn'
+import {upData} from '../../utility/schema.fn'
+import {USER} from "../../config.constants"
 
 const userSchema: any = new Mongoose.Schema({
     name: String,
@@ -18,7 +19,6 @@ const userSchema: any = new Mongoose.Schema({
     password: String,
     rid: String,  //对应角色id
     state: Boolean, //当前用户状态，是否可用
-    superadmin: Boolean, //是否为超级管理员
     time: {
         createAt: {
             type: Date,
@@ -33,4 +33,4 @@ const userSchema: any = new Mongoose.Schema({
 
 userSchema.pre('save', upData);
 
-export default  Mongoose.model('user', userSchema);
+export default Mongoose.model(USER, userSchema);

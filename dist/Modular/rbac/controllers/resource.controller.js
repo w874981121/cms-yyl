@@ -6,20 +6,29 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const resource_services_1 = require("../services/resource.services");
+// import {debug} from "util";
 //添加权限
-exports.AddResource = async (ctx, next) => {
+const AddResource = async (ctx, next) => {
     let o = ctx.request.body;
-    console.log(o);
     await resource_services_1.default.moAdd(o).then((res) => {
         console.log(res);
+        if (res.code === "10001") {
+            console.log(res);
+            ctx.response.body = {
+                code: res.code,
+                mas: "已存在"
+            };
+            return;
+        }
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
         };
     });
 };
+exports.AddResource = AddResource;
 //查询
-exports.QueryResource = async (ctx, next) => {
+const QueryResource = async (ctx, next) => {
     let o = ctx.request.body;
     await resource_services_1.default.moFind(o).then((res) => {
         console.log(typeof res);
@@ -42,8 +51,9 @@ exports.QueryResource = async (ctx, next) => {
         };
     });
 };
+exports.QueryResource = QueryResource;
 //删除
-exports.DeleteResource = async (ctx, next) => {
+const DeleteResource = async (ctx, next) => {
     console.log(ctx.request.query);
     let o = ctx.request.query;
     await resource_services_1.default.moDelete(o).then((res) => {
@@ -54,9 +64,11 @@ exports.DeleteResource = async (ctx, next) => {
         };
     });
 };
+exports.DeleteResource = DeleteResource;
 //修改
-exports.ModifyResource = async (ctx, next) => {
+const ModifyResource = async (ctx, next) => {
     let o = ctx.request.body;
     await resource_services_1.default.moFind(o).then((res) => {
     });
 };
+exports.ModifyResource = ModifyResource;

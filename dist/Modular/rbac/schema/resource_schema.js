@@ -10,12 +10,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Mongoose = require("mongoose");
 const schema_fn_1 = require("../../utility/schema.fn");
+const config_constants_1 = require("../../config.constants");
 const resoureSchema = new Mongoose.Schema({
     name: String,
     id: { type: Number, default: 0 },
     grade: { type: Number, default: 0 },
     address: { type: String, default: null },
-    uid: [],
+    uid: [{}],
     state: { type: Boolean, default: true },
     time: {
         createAt: {
@@ -28,6 +29,6 @@ const resoureSchema = new Mongoose.Schema({
         },
     }
 });
-resoureSchema.pre('create', schema_fn_1.upData);
-const MongodbResource = Mongoose.model('user', resoureSchema);
+resoureSchema.pre('POWER', schema_fn_1.upData);
+const MongodbResource = Mongoose.model(config_constants_1.POWER, resoureSchema);
 exports.default = MongodbResource;

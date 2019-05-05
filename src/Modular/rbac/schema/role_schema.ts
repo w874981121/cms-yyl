@@ -12,13 +12,18 @@
 
 import * as Mongoose from 'mongoose';
 import {upData} from "../../utility/schema.fn";
+import {ROLE} from "../../config.constants"
 
-const roleSchema:any = new Mongoose.Schema({
+const roleSchema: any = new Mongoose.Schema({
     name: String,
-    rid: [],  //对应资源（权限）id
-    uid: [],  //对应拥有此角色的用户id
-    pid: String,  // 层级关系上级id
-    pids: [],   // 所有上级id
+    rid: [{
+        name: String,    //权限名称
+        id: {type: Number, default: 0},      //权限的_id
+        grade: {type: Number, default: 0},   // 权限的等级
+    }],             //拥有的权限列表
+    uid: [],        //对应拥有此角色的用户id
+    pid: String,    // 层级关系上级id
+    pids: [],       // 所有上级id
     state: Boolean, //当前角色状态，是否可用
     time: {
         createAt: {
@@ -34,4 +39,4 @@ const roleSchema:any = new Mongoose.Schema({
 
 roleSchema.pre('save', upData);
 
-export default  Mongoose.model('user', roleSchema);
+export default Mongoose.model(ROLE, roleSchema);
