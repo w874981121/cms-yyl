@@ -6,24 +6,23 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const resource_services_1 = require("../services/resource.services");
+const config_constants_1 = require("../../config.constants");
 // import {debug} from "util";
 //添加权限
 const AddResource = async (ctx, next) => {
     let o = ctx.request.body;
     await resource_services_1.default.moAdd(o).then((res) => {
-        console.log(res);
-        if (res.code === "10001") {
-            console.log(res);
-            ctx.response.body = {
-                code: res.code,
-                mas: "已存在"
-            };
-            return;
+        let _obj = {};
+        switch (res.code) {
+            case 10001:
+                _obj = res;
+                break;
+            default:
+                _obj = config_constants_1.ResultEnum["SUCCESS"];
+                break;
         }
-        ctx.response.body = {
-            code: ctx.response.status,
-            msg: ctx.response.message,
-        };
+        ctx.response.body = _obj;
+        return;
     });
 };
 exports.AddResource = AddResource;
@@ -31,24 +30,25 @@ exports.AddResource = AddResource;
 const QueryResource = async (ctx, next) => {
     let o = ctx.request.body;
     await resource_services_1.default.moFind(o).then((res) => {
-        console.log(typeof res);
-        let filter_res = [];
-        res.forEach((tem, i) => {
-            filter_res.push({
-                name: tem.name,
-                uid: tem.uid,
-                _id: tem._id,
-                id: tem.id,
-                grade: tem.grade,
-                address: tem.address,
-                state: tem.state
+        let filter_res = { data: [] };
+        if (ctx.response.status === 200) {
+            res.forEach((tem, i) => {
+                filter_res["data"].push({
+                    name: tem.name,
+                    uid: tem.uid,
+                    _id: tem._id,
+                    id: tem.id,
+                    grade: tem.grade,
+                    address: tem.address,
+                    state: tem.state
+                });
             });
-        });
-        ctx.response.body = {
-            code: ctx.response.status,
-            msg: ctx.response.message,
-            data: filter_res,
-        };
+            filter_res = Object.assign(filter_res, config_constants_1.ResultEnum["SUCCESS"]);
+        }
+        else {
+            filter_res = Object.assign(config_constants_1.ResultEnum["SYSTEM_ERROR"]);
+        }
+        ctx.response.body = filter_res;
     });
 };
 exports.QueryResource = QueryResource;

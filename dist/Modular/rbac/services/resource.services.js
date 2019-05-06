@@ -6,13 +6,14 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const resource_schema_1 = require("../schema/resource_schema");
+const config_constants_1 = require("../../config.constants");
 const PowerOperation = {
     //添加
     moAdd(o) {
         return new Promise((resolve, reject) => {
             resource_schema_1.default.distinct("name").then((res) => {
                 if (res.includes(o.name)) {
-                    return resolve({ code: "10001" }); //字段重复
+                    return resolve(config_constants_1.ResultEnum["REPEAT"]); //字段重复
                 }
                 resource_schema_1.default.create(o, (err, candies) => {
                     if (candies) {
@@ -24,10 +25,6 @@ const PowerOperation = {
             }).catch((err) => {
                 reject(err);
             });
-        });
-    },
-    batchMoAdd(a) {
-        resource_schema_1.default.create(a, () => {
         });
     },
     //删除
@@ -42,6 +39,7 @@ const PowerOperation = {
             });
         });
     },
+    //批量删除
     batchMoDelete(a) {
         return new Promise((resolve, reject) => {
             resource_schema_1.default.remove(a, ({ err, res }) => {
@@ -67,7 +65,14 @@ const PowerOperation = {
     },
     //根据id查询修改
     moIdModify(id, u) {
-        resource_schema_1.default.findByIdAndUpdate(id, u, () => {
+        return new Promise((resolve, reject) => {
+            resource_schema_1.default.findByIdAndUpdate(id, u, (err, res) => {
+                if (res) {
+                    setTimeout(() => {
+                        resolve(res);
+                    }, 1);
+                }
+            });
         });
     },
     batchMoModify() {

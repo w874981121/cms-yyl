@@ -7,14 +7,15 @@
 'use strict';
 
 import POWER from "../schema/resource_schema"
+import {ResultEnum} from "../../config.constants"
 
 const PowerOperation = {
     //添加
     moAdd(o: any) {
         return new Promise((resolve, reject) => {
-            POWER.distinct("name").then((res:any)=>{
-                if(res.includes(o.name)){
-                    return resolve({code:"10001" })//字段重复
+            POWER.distinct("name").then((res: any) => {
+                if (res.includes(o.name)) {
+                    return resolve(ResultEnum["REPEAT"])  //字段重复
                 }
                 POWER.create(o, (err: any, candies: any) => {
                     if (candies) {
@@ -23,15 +24,9 @@ const PowerOperation = {
                         }, 1)
                     }
                 })
-            }).catch((err:any)=>{
+            }).catch((err: any) => {
                 reject(err)
             })
-        })
-    },
-
-    batchMoAdd(a: any) {
-        POWER.create(a, () => {
-
         })
     },
 
@@ -47,6 +42,8 @@ const PowerOperation = {
             })
         })
     },
+
+    //批量删除
     batchMoDelete(a: any) {
         return new Promise((resolve, reject) => {
             POWER.remove(a, ({err, res}) => {
@@ -74,10 +71,17 @@ const PowerOperation = {
 
     //根据id查询修改
     moIdModify(id: number, u: any) {
-        POWER.findByIdAndUpdate(id, u, () => {
-
+        return new Promise((resolve, reject) => {
+            POWER.findByIdAndUpdate(id, u, (err, res) => {
+                if (res) {
+                    setTimeout(() => {
+                        resolve(res)
+                    }, 1)
+                }
+            })
         })
     },
+
     batchMoModify() {
     },
 

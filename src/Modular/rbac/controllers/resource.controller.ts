@@ -6,25 +6,25 @@
 
 'use strict';
 import PowerOperation from "../services/resource.services"
+import {ResultEnum} from "../../config.constants"
+import {messageFn} from "../../utility/public.fn"
 // import {debug} from "util";
 
 //添加权限
 const AddResource = async (ctx: any, next: any) => {
     let o = ctx.request.body;
     await PowerOperation.moAdd(o).then((res: any) => {
-        console.log(res)
-        if(res.code === "10001"){
-            console.log(res)
-            ctx.response.body={
-                code:res.code,
-                mas:"已存在"
-            }
-            return
+        let _obj:object = {}
+        switch (res.code) {
+            case 10001:
+                _obj = res
+                break
+            default:
+                _obj = ResultEnum["SUCCESS"]
+                break
         }
-        ctx.response.body = {
-            code: ctx.response.status,
-            msg: ctx.response.message,
-        }
+        ctx.response.body = _obj
+        return
     })
 }
 
@@ -32,24 +32,27 @@ const AddResource = async (ctx: any, next: any) => {
 const QueryResource = async (ctx: any, next: any) => {
     let o = ctx.request.body
     await PowerOperation.moFind(o).then((res: any) => {
-        console.log(typeof res)
-        let filter_res: any = [];
-        res.forEach((tem: any, i: number) => {
-            filter_res.push({
-                name: tem.name,
-                uid: tem.uid,
-                _id: tem._id,
-                id: tem.id,
-                grade: tem.grade,
-                address: tem.address,
-                state: tem.state
-            })
-        })
-        ctx.response.body = {
-            code: ctx.response.status,
-            msg: ctx.response.message,
-            data: filter_res,
+        interface Person{
+            data: Array<any>
         }
+        let filter_res : Person = {data: []}
+        if(ctx.response.status === 200){
+            res.forEach((tem: any, i: number) => {
+                filter_res["data"].push({
+                    name: tem.name,
+                    uid: tem.uid,
+                    _id: tem._id,
+                    id: tem.id,
+                    grade: tem.grade,
+                    address: tem.address,
+                    state: tem.state
+                })
+            })
+            filter_res = Object.assign(filter_res,ResultEnum["SUCCESS"])
+        }else{
+            filter_res =Object.assign(ResultEnum["SYSTEM_ERROR"])
+        }
+        ctx.response.body = filter_res
     })
 }
 
