@@ -5,53 +5,61 @@
  * */
 
 'use strict';
-import MongodbResource from "../schema/resource_schema"
-import UserOperation from "../services/resource.services"
-import { debug } from "util";
+import PowerOperation from "../services/resource.services"
+import {ResultEnum} from "../../config.constants"
 
 //添加权限
-export const AddResource = async (ctx: any, next: any) => {
+const AddResource = async (ctx: any, next: any) => {
     let o = ctx.request.body;
-    await UserOperation.moAdd(o).then((res) => {
-        console.log(res)
-        ctx.response.body = {
-            code: ctx.response.status,
-            msg: ctx.response.message,
-            data: res,
+    await PowerOperation.moAdd(o).then((res: any) => {
+        let _obj:object = {}
+        switch (res.code) {
+            case 10001:
+                _obj = res
+                break
+            default:
+                _obj = ResultEnum["SUCCESS"]
+                break
         }
+        ctx.response.body = _obj
+        return
     })
 }
 
 //查询
-export const QueryResource = async (ctx: any, next: any) => {
+const QueryResource = async (ctx: any, next: any) => {
     let o = ctx.request.body
-    await UserOperation.moFind(o).then((res: any) => {
-        console.log(typeof res)
-        let filter_res: any = [];
-        res.forEach((tem: any, i: number) => {
-            filter_res.push({
-                name: tem.name,
-                uid: tem.uid,
-                _id: tem._id,
-                id: tem.id,
-                grade: tem.grade,
-                state: tem.state,
-                address: tem.address,
-            })
-        })
-        ctx.response.body = {
-            code: ctx.response.status,
-            msg: ctx.response.message,
-            data: filter_res,
+    await PowerOperation.moFind(o).then((res: any) => {
+        console.log(res)
+        interface Person{
+            data: Array<any>
         }
+        let filter_res : Person = {data: []}
+        if(ctx.response.status === 200){
+            res.forEach((tem: any, i: number) => {
+                filter_res["data"].push({
+                    name: tem.name,
+                    uid: tem.uid,
+                    _id: tem._id,
+                    id: tem.id,
+                    grade: tem.grade,
+                    address: tem.address,
+                    state: tem.state
+                })
+            })
+            filter_res = Object.assign(filter_res,ResultEnum["SUCCESS"])
+        }else{
+            filter_res =Object.assign(ResultEnum["SYSTEM_ERROR"])
+        }
+        ctx.response.body = filter_res
     })
 }
 
 //删除
-export const DeleteResource = async (ctx: any, next: any) => {
+const DeleteResource = async (ctx: any, next: any) => {
     console.log(ctx.request.query)
     let o = ctx.request.query
-    await UserOperation.moDelete(o).then((res) => {
+    await PowerOperation.moDelete(o).then((res: any) => {
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
@@ -61,8 +69,16 @@ export const DeleteResource = async (ctx: any, next: any) => {
 }
 
 //修改
-export const ModifyResource = async (ctx: any, next: any) => {
+const ModifyResource = async (ctx: any, next: any) => {
     let o = ctx.request.body
-    await UserOperation.moFind(o).then((res) => {
+    await PowerOperation.moFind(o).then((res: any) => {
+
     })
+}
+
+export {
+    AddResource,
+    QueryResource,
+    DeleteResource,
+    ModifyResource
 }

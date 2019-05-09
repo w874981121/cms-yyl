@@ -12,14 +12,14 @@
 
 import * as Mongoose from 'mongoose';
 import {upData} from "../../utility/schema.fn";
-
+import {POWER} from "../../config.constants"
 const resoureSchema: any = new Mongoose.Schema({
     name: String,
-    id: {type: Number, default: 0},
-    uid: Array,  //权限拥有此角色的id
-    grade:{type: Number, default: 2},     // 权限等级
-    state:{type: Boolean, default: true}, //权限开启关闭
-    address:{type: String, default: ""},
+    id: {type: Number, default: 1},
+    grade: {type: Number, default: 0},   // 等级
+    address: {type: String, default: null},  // 描述
+    uid: [{}],  //权限拥有此权限的角色信息
+    state: {type: Boolean, default: true}, //当前权限状态，是否可用
     time: {
         createAt: {
             type: Date,
@@ -32,9 +32,10 @@ const resoureSchema: any = new Mongoose.Schema({
     }
 });
 
-resoureSchema.pre('create', upData);
+resoureSchema.pre('save', upData("POWER"));
 
-const MongodbResource = Mongoose.model('user', resoureSchema);
+
+const MongodbResource = Mongoose.model(POWER, resoureSchema);
 
 export default MongodbResource
 

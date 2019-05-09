@@ -8,14 +8,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Mongoose = require("mongoose");
 const schema_fn_1 = require("../../utility/schema.fn");
+const config_constants_1 = require("../../config.constants");
 const userSchema = new Mongoose.Schema({
     name: String,
+    id: { type: Number, default: 0 },
     phone: Number,
     user: String,
     password: String,
     rid: String,
     state: Boolean,
-    superadmin: Boolean,
     time: {
         createAt: {
             type: Date,
@@ -27,5 +28,5 @@ const userSchema = new Mongoose.Schema({
         },
     }
 });
-userSchema.pre('save', schema_fn_1.upData);
-exports.default = Mongoose.model('user', userSchema);
+userSchema.pre('save', schema_fn_1.upData("USER"));
+exports.default = Mongoose.model(config_constants_1.USER, userSchema);

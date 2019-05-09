@@ -1,19 +1,13 @@
 /**
  *
  *
- * mongodb 数据库，公用方法
+ * 开发，常用公用方法
  *
  *
  **/
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-//时间更新函数
-exports.upData = function (next) {
-    if (!this.isNew) {
-        this.time.updateAt = Date.now();
-    }
-    else {
-        this.time.createAt = this.time.updateAt = Date.now();
-    }
-    next();
+//消息参数对象返回处理
+const messageFn = function () {
 };
+exports.messageFn = messageFn;
