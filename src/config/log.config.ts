@@ -62,11 +62,11 @@ const config: object = {
         }
     },
     categories: {
-        default: {appenders: ['stdout','oth'], level: 'debug'},      //默认
-        err: {appenders: ['stdout', 'err', 'oth'], level: 'error'}, //接口错误日志
-        oth: {appenders: ['stdout', 'oth'], level: 'info'},        //全部
-        req:{appenders: ['stdout', 'req','oth'], level: 'info'},  //请求
-        db:{appenders: ['stdout', 'db','oth'], level: 'info'},  //数据库
+        default: { appenders: ['stdout', 'oth'], level: 'debug' },      //默认
+        err: { appenders: ['stdout', 'err', 'oth'], level: 'error' }, //接口错误日志
+        oth: { appenders: ['stdout', 'oth'], level: 'info' },        //全部
+        req: { appenders: ['stdout', 'req', 'oth'], level: 'info' },  //请求
+        db: { appenders: ['stdout', 'db', 'oth'], level: 'info' },  //数据库
     }
 };
 

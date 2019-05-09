@@ -6,14 +6,12 @@
 
 'use strict';
 import MongodbResource from "../schema/resource_schema"
-
 import UserOperation from "../services/resource.services"
-import {debug} from "util";
+import { debug } from "util";
 
 //添加权限
 export const AddResource = async (ctx: any, next: any) => {
     let o = ctx.request.body;
-    console.log(o)
     await UserOperation.moAdd(o).then((res) => {
         console.log(res)
         ctx.response.body = {
@@ -29,20 +27,22 @@ export const QueryResource = async (ctx: any, next: any) => {
     let o = ctx.request.body
     await UserOperation.moFind(o).then((res: any) => {
         console.log(typeof res)
-        let filter_res: any =[];
+        let filter_res: any = [];
         res.forEach((tem: any, i: number) => {
             filter_res.push({
                 name: tem.name,
                 uid: tem.uid,
                 _id: tem._id,
-                id: tem.id
+                id: tem.id,
+                grade: tem.grade,
+                state: tem.state,
+                address: tem.address,
             })
         })
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
             data: filter_res,
-            res:res
         }
     })
 }

@@ -9,7 +9,6 @@ const resource_services_1 = require("../services/resource.services");
 //添加权限
 exports.AddResource = async (ctx, next) => {
     let o = ctx.request.body;
-    console.log(o);
     await resource_services_1.default.moAdd(o).then((res) => {
         console.log(res);
         ctx.response.body = {
@@ -30,14 +29,16 @@ exports.QueryResource = async (ctx, next) => {
                 name: tem.name,
                 uid: tem.uid,
                 _id: tem._id,
-                id: tem.id
+                id: tem.id,
+                grade: tem.grade,
+                state: tem.state,
+                address: tem.address,
             });
         });
         ctx.response.body = {
             code: ctx.response.status,
             msg: ctx.response.message,
             data: filter_res,
-            res: res
         };
     });
 };

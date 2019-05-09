@@ -7,6 +7,7 @@
  *
  * */
 
+
 'use strict';
 
 import * as Mongoose from 'mongoose';
@@ -15,8 +16,10 @@ import {upData} from "../../utility/schema.fn";
 const resoureSchema: any = new Mongoose.Schema({
     name: String,
     id: {type: Number, default: 0},
-    uid: [],  //权限拥有此角色的id
-    state: Boolean, //当前权限状态，是否可用
+    uid: Array,  //权限拥有此角色的id
+    grade:{type: Number, default: 2},     // 权限等级
+    state:{type: Boolean, default: true}, //权限开启关闭
+    address:{type: String, default: ""},
     time: {
         createAt: {
             type: Date,
