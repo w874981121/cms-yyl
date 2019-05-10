@@ -12,6 +12,7 @@ const AddResource = async (ctx, next) => {
     let o = ctx.request.body;
     await resource_services_1.default.moAdd(o).then((res) => {
         let _obj = {};
+        console.log(res);
         switch (res.code) {
             case 10001:
                 _obj = res;
@@ -72,3 +73,9 @@ const ModifyResource = async (ctx, next) => {
     });
 };
 exports.ModifyResource = ModifyResource;
+exports.default = {
+    AddResource,
+    QueryResource,
+    DeleteResource,
+    ModifyResource
+};

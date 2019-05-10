@@ -4,8 +4,7 @@
  *
  * */
 
-import Router = require('koa-router')
-
+import * as Router from "koa-router";
 const router = new Router();
 
 //上传文件模块

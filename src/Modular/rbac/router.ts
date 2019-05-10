@@ -4,9 +4,8 @@
  *
  * */
 
-import * as Router from 'koa-router'
 import {AddResource, QueryResource, DeleteResource, ModifyResource} from "./controllers/resource.controller"
-
+import * as Router from "koa-router";
 const resource = new Router();
 
 resource.post('addresource', <any>AddResource)     //添加新的权限

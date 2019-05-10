@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 //数据库表名称
-const POWER = "POWER";
+const POWER = "POWER"; //权限
 exports.POWER = POWER;
-const ROLE = "ROLE";
+const ROLE = "ROLE"; //角色
 exports.ROLE = ROLE;
-const USER = "USER";
+const USER = "USER"; //用户
 exports.USER = USER;
-const COUNT = "COUNT";
+const COUNT = "COUNT"; //计数
 exports.COUNT = COUNT;
 //消息
 const ResultEnum = {
-    SUCCESS: { code: 0, message: "成功" },
+    SUCCESS: { code: 200, message: "成功" },
     REPEAT: { code: 10001, message: "重复" },
     UNKNOWN_ERROR: { code: 100, message: "未知错误" },
     SYSTEM_ERROR: { code: 1000001, message: "系统错误" },

@@ -6,10 +6,10 @@
 import {isNumber} from "util";
 
 //数据库表名称
-const POWER: string = "POWER";
-const ROLE: string = "ROLE";
-const USER: string = "USER";
-const COUNT: string = "COUNT";
+const POWER: string = "POWER";   //权限
+const ROLE: string = "ROLE";     //角色
+const USER: string = "USER";     //用户
+const COUNT: string = "COUNT";   //计数
 
 //消息
 const ResultEnum: {
@@ -24,7 +24,7 @@ const ResultEnum: {
     EMPTY_USERNAME: object,
     EMPTY_PASSWORD: object,
 } = {
-    SUCCESS:{code: 0, message: "成功"},
+    SUCCESS:{code: 200, message: "成功"},
     REPEAT: {code: 10001, message: "重复"},
     UNKNOWN_ERROR: {code: 100, message: "未知错误"},
     SYSTEM_ERROR: {code: 1000001, message: "系统错误"},

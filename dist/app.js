@@ -6,10 +6,10 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const Koa = require("koa");
-const koaBody = require("koa-body");
 const connect_db_1 = require("./mongodb/connect-db");
 const log_config_1 = require("./config/log.config");
-const router_config_1 = require("./config/router.config");
+const routers_map_1 = require("./routers/routers.map");
+const koaBody = require("koa-body");
 const app = new Koa();
 /**
  *
@@ -43,7 +43,7 @@ app.use(koaBody({
         maxFileSize: 200 * 1024 * 1024 // 设置上传文件大小最大限制，默认2M
     }
 }));
-app.use(router_config_1.default.routes()).use(router_config_1.default.allowedMethods());
+app.use(routers_map_1.default.routes()).use(routers_map_1.default.allowedMethods());
 connect_db_1.default;
 app.listen(3000, () => {
     console.log('服务启动成功：http://127.0.0.1:3000');

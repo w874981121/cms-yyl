@@ -5,8 +5,8 @@
  *
  * */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Router = require("koa-router");
 const resource_controller_1 = require("./controllers/resource.controller");
+const Router = require("koa-router");
 const resource = new Router();
 resource.post('addresource', resource_controller_1.AddResource); //添加新的权限
 resource.get('queryresources', resource_controller_1.QueryResource); //查询权限列表

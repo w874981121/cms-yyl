@@ -6,11 +6,10 @@
 'use strict';
 
 import Koa = require('koa');
-import koaBody = require('koa-body');
 import MongoClient from "./mongodb/connect-db";
 import log4js from './config/log.config';
-import router from './config/router.config';
-
+import router from './routers/routers.map';
+import koaBody = require('koa-body');
 
 const app = new Koa();
 /**
@@ -22,14 +21,14 @@ const app = new Koa();
  **/
 const loggerReq = log4js.getLogger('db');
 const loggerErr = log4js.getLogger('err');
-app.use(async(ctx, next) => {
-    const start:any = new Date()
+app.use(async (ctx: any, next: any) => {
+    const start: any = new Date()
     try {
         ctx.set("Access-Control-Allow-Origin", "*");
         await next()
-        let ms:any = <any>new Date() - start
-        loggerReq.info("app.ts-接口处理时间："+ ms)
-    }catch{
+        let ms: any = <any>new Date() - start
+        loggerReq.info("app.ts-接口处理时间：" + ms)
+    } catch {
         loggerReq.error("66666-------666666")
     }
 })
@@ -41,7 +40,7 @@ app.use(async(ctx, next) => {
 app.use(koaBody({
     multipart: true,
     formidable: {
-        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+        maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
     }
 }));
 
@@ -50,7 +49,7 @@ app.use(router.routes()).use(router.allowedMethods());
 
 MongoClient;
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log('服务启动成功：http://127.0.0.1:3000');
 });
 

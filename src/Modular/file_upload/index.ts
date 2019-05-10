@@ -4,8 +4,9 @@
  * 支持类型【img】
  *
  * **/
-import * as Router from 'koa-router'
+
 import {ApiRes}  from './controllers/index'
+import * as Router from 'koa-router'
 const upload = new Router();
 
 upload.post('/upload', <any>ApiRes)

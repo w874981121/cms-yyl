@@ -13,6 +13,7 @@ const AddResource = async (ctx: any, next: any) => {
     let o = ctx.request.body;
     await PowerOperation.moAdd(o).then((res: any) => {
         let _obj:object = {}
+        console.log(res)
         switch (res.code) {
             case 10001:
                 _obj = res
@@ -76,7 +77,14 @@ const ModifyResource = async (ctx: any, next: any) => {
     })
 }
 
-export {
+export  {
+    AddResource,
+    QueryResource,
+    DeleteResource,
+    ModifyResource
+}
+
+export default {
     AddResource,
     QueryResource,
     DeleteResource,
